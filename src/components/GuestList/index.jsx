@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Container, GridItem, ButtonContainer, AddNewGuestContainer } from './styles'
+import { Container, GridItem, ButtonContainer, AddNewGuestContainer, CardsWrapper, CardTitle } from './styles'
+import * as S from './styles'
+import { FaEdit, FaTrash, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
+
 
 export function GuestList(props) {
   const [guests, setGuests] = useState([]);
@@ -34,28 +37,33 @@ export function GuestList(props) {
 
   return (
     <Container>
-        <AddNewGuestContainer>
+      <AddNewGuestContainer>
           <input 
             type="text" 
             value={guestName} 
             onChange={(e) => setGuestName(e.target.value)} 
             placeholder="Nome do convidado"
           />
-          <button onClick={addGuest}>Cadastrar Convidado</button>
+          <S.Button onClick={addGuest}>Cadastrar Convidado</S.Button>
         </AddNewGuestContainer>
         
-        {guests.map((guest, index) => (
-          <GridItem index={index} background={index % 2 == 0 ? "#f2eded": "#e3dada"}>
-            <p>{guest.name} {guest.confirmed ? '(Confirmado)' : ''}</p>
-            <ButtonContainer>
-              <button onClick={() => editGuest(index)}>Editar</button>
-              <button onClick={() => deleteGuest(index)}>Excluir</button>
-              <button onClick={() => toggleConfirmation(index)}>
-                {guest.confirmed ? 'Cancelar Presença' : 'Confirmar Presença'}
-              </button>
+
+        <CardsWrapper>
+          {guests.map((guest, index) => (
+            <GridItem index={index} background={index % 2 == 0 ? "#f2eded": "#e3dada"}>
+              <CardTitle>{guest.name} {guest.confirmed ? '(Confirmado)' : ''}</CardTitle>
+              <ButtonContainer>
+                <FaEdit onClick={() => editGuest(index)} style={{ cursor: 'pointer', marginRight: '8px', color: '#f2bd87' }} />
+                <FaTrash onClick={() => deleteGuest(index)} style={{ cursor: 'pointer', marginRight: '8px', color: '#f2bd87' }} />
+                {guest.confirmed ? (
+                  <FaTimesCircle onClick={() => toggleConfirmation(index)} style={{ cursor: 'pointer', color: '#f2bd87' }} />
+                ) : (
+                  <FaCheckCircle onClick={() => toggleConfirmation(index)} style={{ cursor: 'pointer', color: '#f2bd87' }} />
+                )}
             </ButtonContainer>
-          </GridItem>
-        ))}
+            </GridItem>
+          ))}
+        </CardsWrapper>
     </Container>
   )
 }

@@ -1,19 +1,20 @@
 import { Container } from './styles'
 import { GuestList } from '../../components/GuestList'
 import { PageNav } from '../../components/PageNav'
+import * as S from './styles'
 
 
 export function Home() {
   return (
-    <Container>
+    <S.Container>
         
         <PageNav />
 
-        <h1>Gerenciamento de Convidados</h1>
+        <S.Title>Gerenciamento de Convidados</S.Title>
         <GuestList />
       
 
       
-    </Container>
+    </S.Container>
   )
 }

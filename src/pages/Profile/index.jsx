@@ -5,6 +5,14 @@ import { Input } from '../../components/Input'
 import { PageNav } from '../../components/PageNav'
 import { Button } from '../../components/Button'
 
+
+const inputData = [
+  { placeholder: "Nome", type: "text", icon: FiUser },
+  { placeholder: "E-mail", type: "text", icon: FiMail },
+  { placeholder: "Senha atual", type: "password", icon: FiLock },
+  { placeholder: "Nova senha", type: "password", icon: FiLock },
+]
+
 import { Container, Form, Avatar } from "./styles";
 
 export function Profile() {
@@ -28,29 +36,15 @@ export function Profile() {
           </label>
         </Avatar>
 
-        <Input
-          placeholder="Nome"
-          type="text"
-          icon={FiUser}
-        />
+        {inputData.map((input, index) => (
+          <Input
+            key={index}
+            placeholder={input.placeholder}
+            type={input.type}
+            icon={input.icon}
+          />
+        ))}
 
-        <Input
-          placeholder="E-mail"
-          type="text"
-          icon={FiMail}
-        />
-
-        <Input
-          placeholder="Senha atual"
-          type="password"
-          icon={FiLock}
-        />
-
-        <Input
-          placeholder="Nova atual"
-          type="password"
-          icon={FiLock}
-        />
 
         <Button title="Salvar" />
       </Form>
